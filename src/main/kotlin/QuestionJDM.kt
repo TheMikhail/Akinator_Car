@@ -6,10 +6,8 @@ class QuestionJDM {
     }
 
     fun filter(): Predicate<*> {
-        val jdmFilter = Predicate<Car> { car: Car ->
-            car.marketList.contains(
-                Market.JDM
-            )
+        val jdmFilter = Predicate<Car> {
+            car: Car -> car.marketList.contains(Market.JDM)
         }
         return jdmFilter
     }
