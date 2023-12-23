@@ -1,9 +1,5 @@
-class Car {
-    var manufactory: Manufactory? = null
-    var model: String? = null
-    var gearbox: String? = null
-    var marketList: List<Market> = ArrayList<Market>()
-    fun getName(): String {
-        return manufactory.toString() + model
-    }
+data class Car(val manufactory: Manufactory, val model:String,
+               val gearbox:String, val marketList:List<Market>){
+
+    val name = manufactory.toString() + model
 }
