@@ -64,9 +64,10 @@ fun App() {
                 }
 
                 TextButton(onClick = {
-
+                    label.value = questionEDM.description()
                 }) {
                     Text(text = "Нет",fontSize = 32.sp)
+
 
                 }
 
