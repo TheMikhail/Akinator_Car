@@ -1,16 +1,11 @@
 import java.util.function.Predicate
 
-class QuestionGearboxAutomatic {
+class QuestionGearboxAutomatic : Question {
     fun description(): String {
         return "Вы хотите машину на автомате?"
     }
 
-    fun filter(): Predicate<*> {
-        val automaticFilter = Predicate { car: Car ->
-            car.gearbox!!.contains(
-                "automatic"
-            )
-        }
-        return automaticFilter
+    fun checkCondition(answer: Boolean): (Car) -> Boolean = { car ->
+        car.gearbox.contains("automatic")
     }
 }

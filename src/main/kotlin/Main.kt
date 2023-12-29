@@ -30,7 +30,7 @@ fun App() {
     val questionUSDM = QuestionUSDM()
 
 
-    val car1 = Car(Manufactory.HONDA,"Civic","manual", listOf(Market.JDM))
+    val car1 = Car(Manufactory.HONDA, "Civic", "manual", listOf(Market.JDM))
     val car2 = Car(Manufactory.VAZ, "2111", "manual", listOf(Market.RDM))
     val car3 = Car(Manufactory.TOYOTA, "Corona", "automatic", listOf(Market.JDM))
     val car4 = Car(Manufactory.MERCEDES, "w140", "manual", listOf(Market.EDM))
@@ -40,21 +40,21 @@ fun App() {
     //val questionRandom = arrayOf(questionUSDM.description(),questionRDM.description(),questionRDM.description(),
     //    questionJDM.description(),questionGearboxAutomatic.description(),questionGearboxAutomatic.description())
 
-   // val questionArray = questionRandom.size
-   // val rand = Random.nextInt(questionArray)
+    // val questionArray = questionRandom.size
+    // val rand = Random.nextInt(questionArray)
     MaterialTheme {
         //var label = remember { mutableStateOf("${questionRandom[rand]}") }
         val label = remember { mutableStateOf(questionJDM.description()) }
-
-        Column (modifier = Modifier.fillMaxSize().padding(bottom = 35.dp) ,verticalArrangement = Arrangement.Bottom){
+        var answer:Boolean
+        Column(modifier = Modifier.fillMaxSize().padding(bottom = 35.dp), verticalArrangement = Arrangement.Bottom) {
             Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
                 TextButton(onClick = {
 
-                        val jdmCar = carFilter.stream().filter(questionJDM.filter() as Predicate<in Car>?).toList()
+                     answer = true
+                    val jdmCar =
+                        carFilter.stream().filter(questionJDM.checkCondition(answer)).toList()
 
-                        label.value = questionGearboxManual.description()
-
-
+                    label.value = questionGearboxManual.description()
 
 
                 }) {
@@ -66,7 +66,7 @@ fun App() {
                 TextButton(onClick = {
                     label.value = questionEDM.description()
                 }) {
-                    Text(text = "Нет",fontSize = 32.sp)
+                    Text(text = "Нет", fontSize = 32.sp)
 
 
                 }
@@ -74,7 +74,7 @@ fun App() {
 
             }
         }
-        Column (modifier = Modifier.fillMaxSize(),verticalArrangement = Arrangement.Center){
+        Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.Center) {
             Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
                 Text(label.value, fontSize = 30.sp)
 
@@ -83,12 +83,11 @@ fun App() {
         }
 
 
-            }
+    }
 }
 
 fun main() = application {
     //это я так понял надо создавать объект
-
 
 
     val sc = Scanner(System.`in`)

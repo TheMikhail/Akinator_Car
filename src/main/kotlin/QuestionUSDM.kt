@@ -1,16 +1,11 @@
 import java.util.function.Predicate
 
-class QuestionUSDM {
+class QuestionUSDM : Question {
     fun description(): String {
         return "Вы хотите Американскую машину?"
     }
 
-    fun filter(): Predicate<*> {
-        val usdmFilter = Predicate<Car> { car: Car ->
-            car.marketList.contains(
-                Market.USDM
-            )
-        }
-        return usdmFilter
+    fun checkCondition(answer: Boolean): (Car) -> Boolean = { car ->
+        car.marketList.contains(Market.USDM)
     }
 }
