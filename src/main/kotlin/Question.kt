@@ -1,9 +1,9 @@
 interface Question {
-    fun someQuestion(){
-        return someQuestion()
+    fun someQuestion() {
+
     }
 
-    fun someFilter(){
-        return someFilter()
+    fun someFilter() {
+        
     }
 }

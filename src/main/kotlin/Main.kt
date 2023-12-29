@@ -52,7 +52,7 @@ fun App() {
 
                      answer = true
                     val jdmCar =
-                        carFilter.stream().filter(questionJDM.checkCondition(answer)).toList()
+                        carFilter.filter(questionJDM.checkCondition(answer)).toList()
 
                     label.value = questionGearboxManual.description()
 
