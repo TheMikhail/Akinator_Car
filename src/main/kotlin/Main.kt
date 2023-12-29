@@ -11,6 +11,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
+import com.sun.net.httpserver.Filter
 import java.util.*
 import java.util.List
 import java.util.function.Predicate
@@ -22,12 +23,12 @@ import kotlin.random.Random
 fun App() {
     //var text by remember { mutableStateOf("Hello, World!") }
 
-    val questionJDM = QuestionJDM()
-    val questionGearboxManual = QuestionGearboxManual()
-    val questionEDM = QuestionEDM()
-    val questionGearboxAutomatic = QuestionGearboxAutomatic()
-    val questionRDM = QuestionRDM()
-    val questionUSDM = QuestionUSDM()
+    val questionJDM = QuestionJDM
+    val questionGearboxManual = QuestionGearboxManual
+    val questionEDM = QuestionEDM
+    val questionGearboxAutomatic = QuestionGearboxAutomatic
+    val questionRDM = QuestionRDM
+    val questionUSDM = QuestionUSDM
 
 
     val car1 = Car(Manufactory.HONDA, "Civic", "manual", listOf(Market.JDM))
@@ -86,8 +87,17 @@ fun App() {
     }
 }
 
+@Composable
+fun QuestionItem(question:Question,onAnswer: Boolean){
+
+}
+@Composable
+fun questionContent (carFilter: List<Car>, question: Question): List<Car> {
+
+
+return carFilter
+}
 fun main() = application {
-    //это я так понял надо создавать объект
 
 
     val sc = Scanner(System.`in`)

@@ -1,6 +1,6 @@
 import java.util.function.Predicate
 
-class QuestionEDM : Question{
+object QuestionEDM : Question{
    override fun description(): String {
         return "Вы хотите Европейскую машину?"
     }

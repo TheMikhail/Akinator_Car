@@ -1,6 +1,5 @@
 import java.util.function.Predicate
-
-class QuestionGearboxManual : Question {
+ object QuestionGearboxManual : Question {
     override fun description(): String {
         return "Вы хотите машину на механике?"
     }
