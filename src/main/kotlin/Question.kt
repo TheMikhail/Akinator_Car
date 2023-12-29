@@ -1,9 +1,8 @@
+import com.sun.net.httpserver.Filter
+
 interface Question {
-    fun someQuestion() {
 
-    }
+    fun description(): String
 
-    fun someFilter() {
-        
-    }
+    fun checkCondition(answer: Boolean): (Car) -> Boolean
 }

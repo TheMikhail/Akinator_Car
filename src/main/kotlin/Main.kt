@@ -35,7 +35,7 @@ fun App() {
     val car3 = Car(Manufactory.TOYOTA, "Corona", "automatic", listOf(Market.JDM))
     val car4 = Car(Manufactory.MERCEDES, "w140", "manual", listOf(Market.EDM))
     val car5 = Car(Manufactory.BMW, "t39", "manual", listOf(Market.EDM))
-    val carFilter = List.of(car1, car2, car3, car4, car5)
+    val carFilter = listOf(car1, car2, car3, car4, car5)
 
     //val questionRandom = arrayOf(questionUSDM.description(),questionRDM.description(),questionRDM.description(),
     //    questionJDM.description(),questionGearboxAutomatic.description(),questionGearboxAutomatic.description())
