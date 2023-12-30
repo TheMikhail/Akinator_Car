@@ -1,5 +1,6 @@
 import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.TextButton
@@ -23,13 +24,6 @@ import kotlin.random.Random
 fun App() {
     //var text by remember { mutableStateOf("Hello, World!") }
 
-    val questionJDM = QuestionJDM
-    val questionGearboxManual = QuestionGearboxManual
-    val questionEDM = QuestionEDM
-    val questionGearboxAutomatic = QuestionGearboxAutomatic
-    val questionRDM = QuestionRDM
-    val questionUSDM = QuestionUSDM
-
 
     val car1 = Car(Manufactory.HONDA, "Civic", "manual", listOf(Market.JDM))
     val car2 = Car(Manufactory.VAZ, "2111", "manual", listOf(Market.RDM))
@@ -37,39 +31,30 @@ fun App() {
     val car4 = Car(Manufactory.MERCEDES, "w140", "manual", listOf(Market.EDM))
     val car5 = Car(Manufactory.BMW, "t39", "manual", listOf(Market.EDM))
     val carFilter = listOf(car1, car2, car3, car4, car5)
+    //val jdmCar =
+    //  carFilter.filter(questionJDM.checkCondition(answer)).toList()
 
-    //val questionRandom = arrayOf(questionUSDM.description(),questionRDM.description(),questionRDM.description(),
-    //    questionJDM.description(),questionGearboxAutomatic.description(),questionGearboxAutomatic.description())
 
-    // val questionArray = questionRandom.size
-    // val rand = Random.nextInt(questionArray)
+}
+
+
+@Composable
+fun QuestionItem(question: Question, onAnswer: (Boolean) -> Unit) {
     MaterialTheme {
-        //var label = remember { mutableStateOf("${questionRandom[rand]}") }
-        val label = remember { mutableStateOf(questionJDM.description()) }
-        var answer:Boolean
+        var answer: Boolean
         Column(modifier = Modifier.fillMaxSize().padding(bottom = 35.dp), verticalArrangement = Arrangement.Bottom) {
+
             Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
                 TextButton(onClick = {
-
-                     answer = true
-                    val jdmCar =
-                        carFilter.filter(questionJDM.checkCondition(answer)).toList()
-
-                    label.value = questionGearboxManual.description()
-
-
-                }) {
-                    Text(text = "Да", fontSize = 32.sp)
-
-
+                    onAnswer(true)
                 }
-
+                ) {
+                    Text(text = "Да", fontSize = 32.sp)
+                }
                 TextButton(onClick = {
-                    label.value = questionEDM.description()
+                    onAnswer(false)
                 }) {
                     Text(text = "Нет", fontSize = 32.sp)
-
-
                 }
 
 
@@ -77,33 +62,29 @@ fun App() {
         }
         Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.Center) {
             Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
-                Text(label.value, fontSize = 30.sp)
+                Text(text = question.description())
 
 
             }
         }
-
-
     }
 }
 
-@Composable
-fun QuestionItem(question:Question,onAnswer: Boolean){
 
-}
-@Composable
-fun questionContent (carFilter: List<Car>, question: Question): List<Car> {
+    @Composable
+    fun questionContent(carFilter: List<Car>, question: Question): List<Car> {
 
 
-return carFilter
-}
-fun main() = application {
-
-
-    val sc = Scanner(System.`in`)
-
-
-    Window(onCloseRequest = ::exitApplication) {
-        App()
+        return carFilter
     }
-}
+
+    fun main() = application {
+
+
+        val sc = Scanner(System.`in`)
+
+
+        Window(onCloseRequest = ::exitApplication) {
+            App()
+        }
+    }
