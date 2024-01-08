@@ -71,20 +71,20 @@ fun QuestionItem(question: Question, onAnswer: (Boolean) -> Unit) {
 }
 
 
-    @Composable
-    fun questionContent(carFilter: List<Car>, question: Question): List<Car> {
+@Composable
+fun questionContent(carFilter: List<Car>, question: Question): List<Car> {
 
 
-        return carFilter
+    return carFilter
+}
+
+fun main() = application {
+
+
+    val sc = Scanner(System.`in`)
+
+
+    Window(onCloseRequest = ::exitApplication) {
+        App()
     }
-
-    fun main() = application {
-
-
-        val sc = Scanner(System.`in`)
-
-
-        Window(onCloseRequest = ::exitApplication) {
-            App()
-        }
-    }
+}
