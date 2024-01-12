@@ -4,7 +4,8 @@ import java.util.function.Predicate
         return "Вы хотите машину на механике?"
     }
 
-    override fun checkCondition(answer: Boolean): (Car) -> Boolean = { car ->
-        car.gearbox.contains("manual")
+    override fun checkCondition(answer: Boolean, car: Car): Boolean
+    {
+        return car.gearbox.contains("manual")
     }
 }

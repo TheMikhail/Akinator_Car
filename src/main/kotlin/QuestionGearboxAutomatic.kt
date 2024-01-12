@@ -5,7 +5,8 @@ object QuestionGearboxAutomatic : Question {
         return "Вы хотите машину на автомате?"
     }
 
-   override fun checkCondition(answer: Boolean): (Car) -> Boolean = { car ->
-        car.gearbox.contains("automatic")
+   override fun checkCondition(answer: Boolean, car: Car): Boolean
+    {
+        return car.gearbox.contains("automatic")
     }
 }

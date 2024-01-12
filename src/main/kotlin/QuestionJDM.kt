@@ -6,8 +6,9 @@ object QuestionJDM : Question {
         return "Вы хотите Японскую машину?"
     }
 
-    override fun checkCondition(answer: Boolean): (Car) -> Boolean = { car ->
-        car.marketList.contains(Market.JDM)
+    override fun checkCondition(answer: Boolean, car: Car): Boolean
+    {
+        return car.market == Market.JDM
     }
 
 

@@ -5,7 +5,8 @@ object QuestionEDM : Question{
         return "Вы хотите Европейскую машину?"
     }
 
-    override fun checkCondition(answer: Boolean): (Car) -> Boolean = { car ->
-        car.marketList.contains(Market.EDM)
+    override fun checkCondition(answer: Boolean, car: Car): Boolean
+    {
+        return car.market == Market.EDM
     }
 }
