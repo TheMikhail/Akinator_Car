@@ -12,7 +12,6 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
 import java.util.*
-import java.util.List
 import javax.sql.rowset.Predicate
 import kotlin.random.Random
 import Question as Question
@@ -31,21 +30,23 @@ fun App() {
     val car5 = Car(Manufactory.BMW, "e39", "manual", Market.EDM)
     val carFilter = listOf(car1, car2, car3, car4, car5)
 
-    var currentQuestion: Question
 
-    currentQuestion = remember { mutableStateOf(Question) }
+
+    val currentQuestion = remember { mutableStateOf(SelectNewQuestion.getNextQuestion()) }
     QuestionItem(currentQuestion, onAnswer = { answer ->
-        filteredCarList.filterByQuestionAnswer
-        selectNewQuestion
+        filteredCars.filterByQuestionAnswer
+        SelectNewQuestion
     })
+
+    val filteredCars = carFilter.filterByAnswer(currentQuestion,true, car1)
 }
 
-fun askNewQuestion(currentQuestion: Question){
+fun AskNewQuestion(currentQuestion: Question){
     val currentQuestion : Question
-    currentQuestion = selectNewQuestion.getNextQuestion()
+    currentQuestion = SelectNewQuestion.getNextQuestion()
 
 }
-object selectNewQuestion {
+object SelectNewQuestion {
     val random = Random
     val remaindQuestion: MutableList<Question> = mutableListOf(
         QuestionJDM, QuestionEDM, QuestionUSDM,
@@ -58,13 +59,11 @@ object selectNewQuestion {
     }
 
 }
-fun filterByQuestionAnswer(carFilter: List<Car>, currentQuestion: Question, predicate: (onAnswer: Boolean) -> Boolean): List<Car> {
-    var filteredCarList = carFilter
+fun List<Car>.filterByAnswer(currentQuestion: Question, answer: Boolean, car: Car)=
+    filter { currentQuestion.checkCondition(answer, car) }
 
-return
-}
 @Composable
-fun questionContent(carFilter: List<Car>, question: Question): List<Car> {
+fun QuestionContent(carFilter: List<Car>, question: Question): List<Car> {
     return carFilter
 }
 @Composable
