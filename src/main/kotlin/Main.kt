@@ -31,27 +31,37 @@ fun App() {
     val carFilter = listOf(car1, car2, car3, car4, car5)
 
 
-
+    val filteredCars = remember { mutableStateOf(carFilter) }
     val currentQuestion = remember { mutableStateOf(SelectNewQuestion.getNextQuestion()) }
-    QuestionItem(currentQuestion, onAnswer = { answer ->
-        filteredCars.filterByQuestionAnswer
-        SelectNewQuestion
-    })
+    if (currentQuestion != null) {
 
-    val filteredCars = carFilter.filterByAnswer(currentQuestion,true, car1)
+            QuestionItem(currentQuestion.value, onAnswer = {answer ->
+                filteredCars.value = filteredCars.value.filterByAnswer(currentQuestion.value, true)
+            })
+
+            currentQuestion.value = SelectNewQuestion.getNextQuestion()
+
+
+    } else {
+        Text(text = "Ваша машина ${filteredCars.value}")
+    }
+
+
 }
 
-fun AskNewQuestion(currentQuestion: Question){
-    val currentQuestion : Question
+fun AskNewQuestion(currentQuestion: Question) {
+    val currentQuestion: Question
     currentQuestion = SelectNewQuestion.getNextQuestion()
 
 }
+
 object SelectNewQuestion {
     val random = Random
     val remaindQuestion: MutableList<Question> = mutableListOf(
         QuestionJDM, QuestionEDM, QuestionUSDM,
         QuestionRDM, QuestionGearboxAutomatic, QuestionGearboxManual
     )
+
     fun getNextQuestion(): Question {
         val randomQuestion = remaindQuestion.random()
         remaindQuestion.remove(randomQuestion)
@@ -59,13 +69,15 @@ object SelectNewQuestion {
     }
 
 }
-fun List<Car>.filterByAnswer(currentQuestion: Question, answer: Boolean, car: Car)=
-    filter { currentQuestion.checkCondition(answer, car) }
+
+fun List<Car>.filterByAnswer(currentQuestion: Question, answer: Boolean) =
+    filter { car -> currentQuestion.checkCondition(answer, car) }
 
 @Composable
 fun QuestionContent(carFilter: List<Car>, question: Question): List<Car> {
     return carFilter
 }
+
 @Composable
 fun QuestionItem(question: Question, onAnswer: (Boolean) -> Unit) {
     var answer: Boolean
@@ -91,6 +103,7 @@ fun QuestionItem(question: Question, onAnswer: (Boolean) -> Unit) {
     }
 
 }
+
 fun main() = application {
     val sc = Scanner(System.`in`)
     MaterialTheme {}
