@@ -1,5 +1,3 @@
-import com.sun.net.httpserver.Filter
-
 interface Question {
 
     fun description(): String

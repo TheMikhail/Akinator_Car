@@ -1,5 +1,3 @@
-import java.util.function.Predicate
-
 object QuestionJDM : Question {
 
     override fun description(): String {
