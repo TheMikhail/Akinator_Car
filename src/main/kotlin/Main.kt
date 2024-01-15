@@ -25,10 +25,11 @@ fun app() {
 
     val filteredCars = remember { mutableStateOf(carFilter) }
     val currentQuestion = remember { mutableStateOf(SelectNewQuestion.getNextQuestion()) }
-    if (currentQuestion != null) {
-        currentQuestion.value = SelectNewQuestion.getNextQuestion()
-        questionItem(currentQuestion.value, onAnswer = { answer ->
-            filteredCars.value = filteredCars.value.filterByAnswer(currentQuestion.value, true)
+    val question = currentQuestion.value
+    if (question != null) {
+        questionItem(question, onAnswer = { answer ->
+            filteredCars.value = filteredCars.value.filterByAnswer(question, true)
+            currentQuestion.value = SelectNewQuestion.getNextQuestion()
         })
     } else {
         val yourCar = filteredCars.value
@@ -42,11 +43,16 @@ object SelectNewQuestion {
         QuestionRDM, QuestionGearboxAutomatic, QuestionGearboxManual
     )
 
-    fun getNextQuestion(): Question {
-        val randomQuestion = remainderQuestion.random()
-        remainderQuestion.remove(randomQuestion)
-        return randomQuestion
+    fun getNextQuestion(): Question? {
+        if (remainderQuestion.isEmpty())
+            return null
+        else {
+            val randomQuestion = remainderQuestion.random()
+            remainderQuestion.remove(randomQuestion)
+            return randomQuestion
+        }
     }
+
 }
 
 fun List<Car>.filterByAnswer(currentQuestion: Question, answer: Boolean) =
