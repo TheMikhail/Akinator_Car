@@ -7,6 +7,6 @@ object QuestionGearboxAutomatic : Question {
 
    override fun checkCondition(answer: Boolean, car: Car): Boolean
     {
-        return car.gearbox.contains("automatic")
+        return car.gearbox == Gearbox.Automatic
     }
 }

@@ -16,11 +16,11 @@ import Question as Question
 @Composable
 @Preview
 fun app() {
-    val car1 = Car(Manufactory.HONDA, "Civic", "manual", Market.JDM)
-    val car2 = Car(Manufactory.VAZ, "2111", "manual", Market.RDM)
-    val car3 = Car(Manufactory.TOYOTA, "Corona", "automatic", Market.JDM)
-    val car4 = Car(Manufactory.MERCEDES, "w140", "manual", Market.EDM)
-    val car5 = Car(Manufactory.BMW, "e39", "manual", Market.EDM)
+    val car1 = Car(Manufactory.HONDA, "Civic", Gearbox.Manual, Market.JDM)
+    val car2 = Car(Manufactory.VAZ, "2111", Gearbox.Manual, Market.RDM)
+    val car3 = Car(Manufactory.TOYOTA, "Corona", Gearbox.Automatic, Market.JDM)
+    val car4 = Car(Manufactory.MERCEDES, "w140", Gearbox.Automatic, Market.EDM)
+    val car5 = Car(Manufactory.BMW, "e39", Gearbox.Manual, Market.EDM)
     val carFilter = listOf(car1, car2, car3, car4, car5)
 
     val filteredCars = remember { mutableStateOf(carFilter) }

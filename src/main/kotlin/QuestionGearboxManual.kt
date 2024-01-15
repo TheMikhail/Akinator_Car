@@ -6,6 +6,6 @@ import java.util.function.Predicate
 
     override fun checkCondition(answer: Boolean, car: Car): Boolean
     {
-        return car.gearbox.contains("manual")
+        return car.gearbox == Gearbox.Manual
     }
 }
