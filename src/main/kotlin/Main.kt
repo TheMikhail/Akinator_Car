@@ -11,18 +11,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
-import java.util.*
-import javax.sql.rowset.Predicate
-import kotlin.random.Random
 import Question as Question
-
 
 @Composable
 @Preview
-fun App() {
-    //var text by remember { mutableStateOf("Hello, World!") }
-
-
+fun app() {
     val car1 = Car(Manufactory.HONDA, "Civic", "manual", Market.JDM)
     val car2 = Car(Manufactory.VAZ, "2111", "manual", Market.RDM)
     val car3 = Car(Manufactory.TOYOTA, "Corona", "automatic", Market.JDM)
@@ -30,57 +23,37 @@ fun App() {
     val car5 = Car(Manufactory.BMW, "e39", "manual", Market.EDM)
     val carFilter = listOf(car1, car2, car3, car4, car5)
 
-
     val filteredCars = remember { mutableStateOf(carFilter) }
     val currentQuestion = remember { mutableStateOf(SelectNewQuestion.getNextQuestion()) }
     if (currentQuestion != null) {
-
-            QuestionItem(currentQuestion.value, onAnswer = {answer ->
-                filteredCars.value = filteredCars.value.filterByAnswer(currentQuestion.value, true)
-            })
-
-            currentQuestion.value = SelectNewQuestion.getNextQuestion()
-
-
+        currentQuestion.value = SelectNewQuestion.getNextQuestion()
+        questionItem(currentQuestion.value, onAnswer = { answer ->
+            filteredCars.value = filteredCars.value.filterByAnswer(currentQuestion.value, true)
+        })
     } else {
-        Text(text = "Ваша машина ${filteredCars.value}")
+        val yourCar = filteredCars.value
+        Text(text = "Ваша машина ${yourCar.single().name}")
     }
-
-
-}
-
-fun AskNewQuestion(currentQuestion: Question) {
-    val currentQuestion: Question
-    currentQuestion = SelectNewQuestion.getNextQuestion()
-
 }
 
 object SelectNewQuestion {
-    val random = Random
-    val remaindQuestion: MutableList<Question> = mutableListOf(
+    private val remainderQuestion: MutableList<Question> = mutableListOf(
         QuestionJDM, QuestionEDM, QuestionUSDM,
         QuestionRDM, QuestionGearboxAutomatic, QuestionGearboxManual
     )
 
     fun getNextQuestion(): Question {
-        val randomQuestion = remaindQuestion.random()
-        remaindQuestion.remove(randomQuestion)
+        val randomQuestion = remainderQuestion.random()
+        remainderQuestion.remove(randomQuestion)
         return randomQuestion
     }
-
 }
 
 fun List<Car>.filterByAnswer(currentQuestion: Question, answer: Boolean) =
     filter { car -> currentQuestion.checkCondition(answer, car) }
 
 @Composable
-fun QuestionContent(carFilter: List<Car>, question: Question): List<Car> {
-    return carFilter
-}
-
-@Composable
-fun QuestionItem(question: Question, onAnswer: (Boolean) -> Unit) {
-    var answer: Boolean
+fun questionItem(question: Question, onAnswer: (Boolean) -> Unit) {
     Column(modifier = Modifier.fillMaxSize().padding(bottom = 35.dp), verticalArrangement = Arrangement.Bottom) {
         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
             TextButton(onClick = {
@@ -105,10 +78,8 @@ fun QuestionItem(question: Question, onAnswer: (Boolean) -> Unit) {
 }
 
 fun main() = application {
-    val sc = Scanner(System.`in`)
     MaterialTheme {}
     Window(onCloseRequest = ::exitApplication) {
-        App()
-
+        app()
     }
 }
