@@ -28,7 +28,7 @@ fun app() {
     val question = currentQuestion.value
     if (question != null) {
         questionItem(question, onAnswer = { answer ->
-            filteredCars.value = filteredCars.value.filterByAnswer(question, true)
+            filteredCars.value = filteredCars.value.filterByAnswer(question, answer)
             currentQuestion.value = SelectNewQuestion.getNextQuestion()
         })
     } else {

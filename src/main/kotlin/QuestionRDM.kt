@@ -5,6 +5,6 @@ object QuestionRDM : Question{
 
     override fun checkCondition(answer: Boolean, car: Car): Boolean
     {
-        return car.market == Market.RDM
+        return (car.market == Market.RDM)== answer
     }
 }

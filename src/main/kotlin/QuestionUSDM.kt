@@ -5,6 +5,6 @@ object QuestionUSDM : Question {
 
     override fun checkCondition(answer: Boolean, car: Car): Boolean
     {
-        return car.market == Market.USDM
+        return (car.market == Market.USDM) == answer
     }
 }

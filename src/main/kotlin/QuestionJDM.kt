@@ -6,7 +6,7 @@ object QuestionJDM : Question {
 
     override fun checkCondition(answer: Boolean, car: Car): Boolean
     {
-        return car.market == Market.JDM
+        return (car.market == Market.JDM)== answer
     }
 
 

@@ -5,6 +5,6 @@
 
     override fun checkCondition(answer: Boolean, car: Car): Boolean
     {
-        return car.gearbox == Gearbox.Manual
+        return (car.gearbox == Gearbox.Manual)== answer
     }
 }
