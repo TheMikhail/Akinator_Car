@@ -3,6 +3,7 @@ enum class Manufactory(val nameMark: String) {
     TOYOTA("Тойота"),
     BMW("БМВ"),
     MERCEDES("Мерседес"),
-    VAZ("ВАЗ");
-
+    VAZ("ВАЗ"),
+    DODGE("Додж"),
+    LINCOLN("Линкольн");
 }

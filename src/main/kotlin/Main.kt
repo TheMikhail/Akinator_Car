@@ -21,7 +21,11 @@ fun app() {
     val car3 = Car(Manufactory.TOYOTA, "Corona", Gearbox.Automatic, Market.JDM)
     val car4 = Car(Manufactory.MERCEDES, "w140", Gearbox.Automatic, Market.EDM)
     val car5 = Car(Manufactory.BMW, "e39", Gearbox.Manual, Market.EDM)
-    val carFilter = listOf(car1, car2, car3, car4, car5)
+    val car6 = Car(Manufactory.VAZ, "Vesta", Gearbox.Automatic, Market.RDM)
+    val car7 = Car(Manufactory.DODGE, "Charger", Gearbox.Manual, Market.USDM)
+    val car8 = Car(Manufactory.LINCOLN, "Navigator", Gearbox.Automatic, Market.USDM)
+    val car9 = Car(Manufactory.HONDA, "Interga", Gearbox.Manual, Market.JDM)
+    val carFilter = listOf(car1, car2, car3, car4, car5, car6, car7, car8)
 
     val filteredCars = remember { mutableStateOf(carFilter) }
     val currentQuestion = remember { mutableStateOf(SelectNewQuestion.getNextQuestion()) }
