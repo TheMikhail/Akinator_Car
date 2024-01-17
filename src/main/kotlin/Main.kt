@@ -81,6 +81,7 @@ fun questionItem(question: Question, onAnswer: (Boolean) -> Unit) {
             }) {
                 Text(text = "Нет", fontSize = 32.sp)
             }
+
         }
     }
     Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.Center) {
