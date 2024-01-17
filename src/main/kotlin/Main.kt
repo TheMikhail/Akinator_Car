@@ -41,12 +41,11 @@ fun app() {
             0 -> Text(text = "Вам не подходит ни одна существующая машина")
             1 -> Text(text = "Ваша машина ${yourCar.single().name}")
             else -> Text(text = "Вам подходят следующие авто: ${yourCar.joinToString(
-                prefix = "вам подходят авто: ",
+                prefix = "Вам подходят авто: ",
                 transform = { car -> car.name} )}")
         }
     }
 }
-
 object SelectNewQuestion {
     private val remainderQuestion: MutableList<Question> = mutableListOf(
         QuestionJDM, QuestionEDM, QuestionUSDM,
@@ -81,6 +80,7 @@ fun questionItem(question: Question, onAnswer: (Boolean) -> Unit) {
             }) {
                 Text(text = "Нет", fontSize = 32.sp)
             }
+
         }
     }
     Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.Center) {
