@@ -43,9 +43,7 @@ fun app() {
             else -> Text(text = "Вам подходят следующие авто: ${yourCar.joinToString(
                 prefix = "вам подходят авто: ",
                 transform = { car -> car.name} )}")
-
         }
-
     }
 }
 
@@ -66,10 +64,8 @@ object SelectNewQuestion {
     }
 
 }
-
 fun List<Car>.filterByAnswer(currentQuestion: Question, answer: Boolean) =
     filter { car -> currentQuestion.checkCondition(answer, car) }
-
 @Composable
 fun questionItem(question: Question, onAnswer: (Boolean) -> Unit) {
     Column(modifier = Modifier.fillMaxSize().padding(bottom = 35.dp), verticalArrangement = Arrangement.Bottom) {
@@ -94,7 +90,6 @@ fun questionItem(question: Question, onAnswer: (Boolean) -> Unit) {
     }
 
 }
-
 fun main() = application {
     MaterialTheme {}
     Window(onCloseRequest = ::exitApplication) {
