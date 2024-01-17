@@ -24,8 +24,8 @@ fun app() {
     val car6 = Car(Manufactory.VAZ, "Vesta", Gearbox.Automatic, Market.RDM)
     val car7 = Car(Manufactory.DODGE, "Charger", Gearbox.Manual, Market.USDM)
     val car8 = Car(Manufactory.LINCOLN, "Navigator", Gearbox.Automatic, Market.USDM)
-    val car9 = Car(Manufactory.HONDA, "Interga", Gearbox.Manual, Market.JDM)
-    val carFilter = listOf(car1, car2, car3, car4, car5, car6, car7, car8)
+    val car9 = Car(Manufactory.HONDA, "Integra", Gearbox.Manual, Market.JDM)
+    val carFilter = listOf(car1, car2, car3, car4, car5, car6, car7, car8,car9)
 
     val filteredCars = remember { mutableStateOf(carFilter) }
     val currentQuestion = remember { mutableStateOf(SelectNewQuestion.getNextQuestion()) }
@@ -37,7 +37,15 @@ fun app() {
         })
     } else {
         val yourCar = filteredCars.value
-        Text(text = "Ваша машина ${yourCar.single().name}")
+        when (yourCar.size){
+            0 -> Text(text = "Вам не подходит ни одна существующая машина")
+            1 -> Text(text = "Ваша машина ${yourCar.single().name}")
+            else -> Text(text = "Вам подходят следующие авто: ${yourCar.joinToString(
+                prefix = "вам подходят авто: ",
+                transform = { car -> car.name} )}")
+
+        }
+
     }
 }
 
