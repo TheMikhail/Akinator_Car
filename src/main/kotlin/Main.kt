@@ -31,7 +31,6 @@ fun app() {
     val currentQuestion = remember { mutableStateOf(SelectNewQuestion.getNextQuestion()) }
     val question = currentQuestion.value
     if (question != null) {
-
         questionItem(question, onAnswer = { answer ->
             filteredCars.value = filteredCars.value.filterByAnswer(question, answer)
             currentQuestion.value = SelectNewQuestion.getNextQuestion()
@@ -47,7 +46,6 @@ fun app() {
         }
     }
 }
-
 object SelectNewQuestion {
     private val remainderQuestion: MutableList<Question> = mutableListOf(
         QuestionJDM, QuestionEDM, QuestionUSDM,
