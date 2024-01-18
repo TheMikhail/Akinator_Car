@@ -49,6 +49,7 @@ fun app() {
         }
     }
 }
+
 object SelectNewQuestion {
     private val remainderQuestion: MutableList<Question> = mutableListOf(
         QuestionJDM, QuestionEDM, QuestionUSDM,
