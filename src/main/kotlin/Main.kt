@@ -55,7 +55,6 @@ object SelectNewQuestion {
         QuestionJDM, QuestionEDM, QuestionUSDM,
         QuestionRDM, QuestionGearboxAutomatic, QuestionGearboxManual
     )
-
     fun getNextQuestion(): Question? {
         if (remainderQuestion.isEmpty())
             return null
