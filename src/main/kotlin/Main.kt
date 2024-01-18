@@ -25,7 +25,7 @@ fun app() {
     val car7 = Car(Manufactory.DODGE, "Charger", Gearbox.Manual, Market.USDM)
     val car8 = Car(Manufactory.LINCOLN, "Navigator", Gearbox.Automatic, Market.USDM)
     val car9 = Car(Manufactory.HONDA, "Integra", Gearbox.Manual, Market.JDM)
-    val carFilter = listOf(car1, car2, car3, car4, car5, car6, car7, car8,car9)
+    val carFilter = listOf(car1, car2, car3, car4, car5, car6, car7, car8, car9)
 
     val filteredCars = remember { mutableStateOf(carFilter) }
     val currentQuestion = remember { mutableStateOf(SelectNewQuestion.getNextQuestion()) }
@@ -37,15 +37,18 @@ fun app() {
         })
     } else {
         val yourCar = filteredCars.value
-        when (yourCar.size){
+        when (yourCar.size) {
             0 -> Text(text = "Вам не подходит ни одна существующая машина")
             1 -> Text(text = "Ваша машина ${yourCar.single().name}")
-            else -> Text(text = "Вам подходят следующие авто: ${yourCar.joinToString(
-                prefix = "Вам подходят авто: ",
-                transform = { car -> car.name} )}")
+            else -> Text(text = "Вам подходят следующие авто: ${
+                yourCar.joinToString(
+                    prefix = "Вам подходят авто: ",
+                    transform = { car -> car.name })
+            }")
         }
     }
 }
+
 object SelectNewQuestion {
     private val remainderQuestion: MutableList<Question> = mutableListOf(
         QuestionJDM, QuestionEDM, QuestionUSDM,
@@ -63,8 +66,10 @@ object SelectNewQuestion {
     }
 
 }
+
 fun List<Car>.filterByAnswer(currentQuestion: Question, answer: Boolean) =
     filter { car -> currentQuestion.checkCondition(answer, car) }
+
 @Composable
 fun questionItem(question: Question, onAnswer: (Boolean) -> Unit) {
     Column(modifier = Modifier.fillMaxSize().padding(bottom = 35.dp), verticalArrangement = Arrangement.Bottom) {
@@ -90,6 +95,7 @@ fun questionItem(question: Question, onAnswer: (Boolean) -> Unit) {
     }
 
 }
+
 fun main() = application {
     MaterialTheme {}
     Window(onCloseRequest = ::exitApplication) {
