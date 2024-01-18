@@ -30,6 +30,7 @@ fun app() {
     val filteredCars = remember { mutableStateOf(carFilter) }
     val currentQuestion = remember { mutableStateOf(SelectNewQuestion.getNextQuestion()) }
     val question = currentQuestion.value
+
     if (question != null) {
         questionItem(question, onAnswer = { answer ->
             filteredCars.value = filteredCars.value.filterByAnswer(question, answer)
