@@ -44,13 +44,14 @@ fun app() {
 }
 
 object SelectNewQuestion {
-    val question = QuestionRepositoryClass()
+    val question = QuestionRepositoryClass().getQuestion().toMutableList()
+
     fun getNextQuestion(): Question? {
-        if (question.getQuestion().isEmpty())
+        if (question.isEmpty())
             return null
         else {
-            val randomQuestion = question.getQuestion().random()
-            question.getQuestion().remove(randomQuestion)
+            val randomQuestion = question.random()
+            question.remove(randomQuestion)
             return randomQuestion
         }
     }

@@ -1,3 +1,3 @@
 interface QuestionRepository {
-    fun getQuestion(): MutableList<Question>
+    fun getQuestion(): List<Question>
 }

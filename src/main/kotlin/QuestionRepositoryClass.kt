@@ -1,10 +1,10 @@
 class QuestionRepositoryClass : QuestionRepository {
 
-    private val remainderQuestion: MutableList<Question> = mutableListOf(
+    private val allQuestion: List<Question> = listOf(
         QuestionJDM, QuestionEDM, QuestionUSDM,
         QuestionRDM, QuestionGearboxAutomatic, QuestionGearboxManual
     )
-    override fun getQuestion():MutableList<Question>{
-        return remainderQuestion
+    override fun getQuestion():List<Question>{
+        return allQuestion
     }
 }
