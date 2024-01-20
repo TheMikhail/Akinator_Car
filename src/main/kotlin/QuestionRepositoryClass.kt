@@ -4,7 +4,8 @@ class QuestionRepositoryClass : QuestionRepository {
         QuestionJDM, QuestionEDM, QuestionUSDM,
         QuestionRDM, QuestionGearboxAutomatic, QuestionGearboxManual
     )
-    override fun getQuestion():List<Question>{
+
+    override fun getQuestion(): List<Question> {
         return allQuestion
     }
 }

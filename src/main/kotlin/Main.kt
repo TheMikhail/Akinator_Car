@@ -17,7 +17,6 @@ import Question as Question
 @Preview
 fun app() {
     val car = CarRepositoryClass()
-
     val filteredCars = remember { mutableStateOf(car.getCar()) }
     val currentQuestion = remember { mutableStateOf(SelectNewQuestion.getNextQuestion()) }
     val question = currentQuestion.value
