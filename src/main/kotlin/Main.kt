@@ -16,18 +16,9 @@ import Question as Question
 @Composable
 @Preview
 fun app() {
-    val car1 = Car(Manufactory.HONDA, "Civic", Gearbox.Manual, Market.JDM)
-    val car2 = Car(Manufactory.VAZ, "2111", Gearbox.Manual, Market.RDM)
-    val car3 = Car(Manufactory.TOYOTA, "Corona", Gearbox.Automatic, Market.JDM)
-    val car4 = Car(Manufactory.MERCEDES, "w140", Gearbox.Automatic, Market.EDM)
-    val car5 = Car(Manufactory.BMW, "e39", Gearbox.Manual, Market.EDM)
-    val car6 = Car(Manufactory.VAZ, "Vesta", Gearbox.Automatic, Market.RDM)
-    val car7 = Car(Manufactory.DODGE, "Charger", Gearbox.Manual, Market.USDM)
-    val car8 = Car(Manufactory.LINCOLN, "Navigator", Gearbox.Automatic, Market.USDM)
-    val car9 = Car(Manufactory.HONDA, "Integra", Gearbox.Manual, Market.JDM)
-    val carFilter = listOf(car1, car2, car3, car4, car5, car6, car7, car8, car9)
+    val car = CarRepositoryClass()
 
-    val filteredCars = remember { mutableStateOf(carFilter) }
+    val filteredCars = remember { mutableStateOf(car.getCar()) }
     val currentQuestion = remember { mutableStateOf(SelectNewQuestion.getNextQuestion()) }
     val question = currentQuestion.value
 
@@ -41,30 +32,28 @@ fun app() {
         when (yourCar.size) {
             0 -> Text(text = "Вам не подходит ни одна существующая машина")
             1 -> Text(text = "Ваша машина ${yourCar.single().name}")
-            else -> Text(text = "Вам подходят следующие авто: ${
-                yourCar.joinToString(
-                    prefix = "Вам подходят авто: ",
-                    transform = { car -> car.name })
-            }")
+            else -> Text(
+                text = "Вам подходят следующие авто: ${
+                    yourCar.joinToString(
+                        prefix = "Вам подходят авто: ",
+                        transform = { car -> car.name })
+                }"
+            )
         }
     }
 }
 
 object SelectNewQuestion {
-    private val remainderQuestion: MutableList<Question> = mutableListOf(
-        QuestionJDM, QuestionEDM, QuestionUSDM,
-        QuestionRDM, QuestionGearboxAutomatic, QuestionGearboxManual
-    )
+    val question = QuestionRepositoryClass()
     fun getNextQuestion(): Question? {
-        if (remainderQuestion.isEmpty())
+        if (question.getQuestion().isEmpty())
             return null
         else {
-            val randomQuestion = remainderQuestion.random()
-            remainderQuestion.remove(randomQuestion)
+            val randomQuestion = question.getQuestion().random()
+            question.getQuestion().remove(randomQuestion)
             return randomQuestion
         }
     }
-
 }
 
 fun List<Car>.filterByAnswer(currentQuestion: Question, answer: Boolean) =
